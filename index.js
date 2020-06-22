@@ -1,6 +1,7 @@
-require('dotenv').config({ path: '/etc/default/map-glyph-server' });
+require('dotenv').config({ path: '.env' });
 
 const connect = require('connect');
+var cors = require('cors')
 const router = require('./lib/map-glyph-server');
 
 const PORT = process.env.MAP_GLYPH_SERVER_PORT || 3060;
@@ -12,7 +13,7 @@ if (!FONT_PATH) {
 }
 
 const app = connect();
-
+app.use(cors())
 app.use(router(FONT_PATH));
 
 
